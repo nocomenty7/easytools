@@ -118,7 +118,7 @@ export const TrustModals: React.FC<TrustModalProps> = ({ type, onClose }) => {
               <div>
                 <h3 className="font-bold text-indigo-600 mb-1">5. 문의처</h3>
                 <p>개인정보 처리와 관련하여 문의 사항이 있으시면 아래 이메일로 연락해 주시기 바랍니다.</p>
-                <p className="mt-1 font-semibold">이메일: support@easytools.kr</p>
+                <p className="mt-1 font-semibold">이메일: nocomenty7@gmail.com</p>
               </div>
             </div>
           )}

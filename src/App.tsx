@@ -606,7 +606,7 @@ function App() {
                 <ChevronDown className="h-4 w-4 text-slate-400 transition-transform duration-300 group-open:rotate-180 shrink-0" />
               </summary>
               <div className="px-5 pb-5 pt-1 text-slate-500 text-xs sm:text-sm leading-relaxed border-t border-slate-100 bg-white rounded-b-2xl text-left">
-                하단 푸터 영역의 **[문의하기 (Contact Us)]** 버튼을 통해 건의 양식을 접수하시거나 공식 이메일 주소(`support@easytools.kr`)로 메일을 전송해 주시면 담당 엔지니어가 실시간 피드백을 전달받습니다. 검토를 거쳐 버그는 당일 즉시 픽스되며, 가치 있는 신규 계산기 기획안은 검토를 통해 신속하게 런칭 및 반영될 것입니다.
+                하단 푸터 영역의 **[문의하기 (Contact Us)]** 버튼을 통해 건의 양식을 접수하시거나 공식 이메일 주소(`nocomenty7@gmail.com`)로 메일을 전송해 주시면 담당 엔지니어가 실시간 피드백을 전달받습니다. 검토를 거쳐 버그는 당일 즉시 픽스되며, 가치 있는 신규 계산기 기획안은 검토를 통해 신속하게 런칭 및 반영될 것입니다.
               </div>
             </details>
 
