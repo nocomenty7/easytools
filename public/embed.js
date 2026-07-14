@@ -71,6 +71,30 @@
         }
       }
 
+      if (data.type === 'easytools-header-open') {
+        const header = document.getElementById('easytools-header-iframe');
+        if (header) {
+          header.style.position = 'fixed';
+          header.style.top = '0';
+          header.style.left = '0';
+          header.style.width = '100vw';
+          header.style.height = '100vh';
+          header.style.zIndex = '999999';
+        }
+      }
+
+      if (data.type === 'easytools-header-close') {
+        const header = document.getElementById('easytools-header-iframe');
+        if (header) {
+          header.style.position = 'relative';
+          header.style.top = '';
+          header.style.left = '';
+          header.style.width = '100%';
+          header.style.height = '64px';
+          header.style.zIndex = '9999';
+        }
+      }
+
       if (data.type === 'easytools-footer-resize') {
         const footer = document.getElementById('easytools-footer-iframe');
         if (footer) {

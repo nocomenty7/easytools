@@ -63,5 +63,42 @@ details[open] summary svg {
 
 /* Hero gradient bg */
 .hero-gradient {
-  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.08) 0%, rgba(20, 184, 166, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.09) 0%, rgba(20, 184, 166, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
 }
+
+/* Background Grid Overlay */
+.bg-grid {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.04) 1.2px, transparent 1.2px);
+}
+
+/* 3D Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Shimmer fade in */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
