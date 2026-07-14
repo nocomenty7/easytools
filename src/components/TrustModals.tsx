@@ -7,15 +7,19 @@ interface TrustModalProps {
 }
 
 export const TrustModals: React.FC<TrustModalProps> = ({ type, onClose }) => {
-  if (!type) return null;
-
   // Prevent background scrolling when modal is open
   React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (type) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [type]);
+
+  if (!type) return null;
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
