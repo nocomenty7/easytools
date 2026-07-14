@@ -102,3 +102,33 @@ details[open] summary svg {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Infinite Marquee Scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Glassmorphic overlay for marquee edges */
+.marquee-fade-left {
+  background: linear-gradient(to right, #f8fafc 0%, transparent 100%);
+}
+
+.marquee-fade-right {
+  background: linear-gradient(to left, #f8fafc 0%, transparent 100%);
+}
+
+
