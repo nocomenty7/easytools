@@ -36,11 +36,16 @@ function App() {
   // Check URL paths to render headers/footers independently for subdomains iframe embedding
   const path = window.location.pathname;
 
-  // Check Cookie Consent on Mount
+  // Check Cookie Consent & Initialize Google AdSense bottom ad slot on mount
   useEffect(() => {
     const consent = localStorage.getItem('easytools-cookie-consent');
     if (!consent) {
       setShowCookieConsent(true);
+    }
+    try {
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch (e) {
+      console.error('AdSense initialization error:', e);
     }
   }, []);
 
@@ -612,6 +617,16 @@ function App() {
 
           </div>
         </section>
+
+        {/* Google AdSense Bottom Ad Slot */}
+        <div className="adsense-slot adsense-bottom max-w-4xl mx-auto my-8 min-h-[100px] w-full flex justify-center items-center bg-slate-50/50 border border-slate-100/80 rounded-2xl p-4 overflow-hidden">
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%' }}
+               data-ad-client="ca-pub-3522634980237009"
+               data-ad-slot="7310226958"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
 
       </main>
 
