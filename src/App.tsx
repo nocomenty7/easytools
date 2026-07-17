@@ -154,6 +154,42 @@ function App() {
     );
   }
 
+  // Route 3: Dedicated About Us Page (SEO & Redirect Link)
+  if (path === '/about') {
+    return (
+      <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white hero-gradient bg-grid pb-10">
+        <Header onFeedbackClick={() => setModalType('contact')} />
+        <Footer onOpenModal={(type) => setModalType(type)} />
+        <TrustModals type="about" onClose={() => window.location.href = '/'} />
+        <TrustModals type={modalType} onClose={() => setModalType(null)} />
+      </div>
+    );
+  }
+
+  // Route 4: Dedicated Privacy Policy Page (SEO & Redirect Link)
+  if (path === '/privacy') {
+    return (
+      <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white hero-gradient bg-grid pb-10">
+        <Header onFeedbackClick={() => setModalType('contact')} />
+        <Footer onOpenModal={(type) => setModalType(type)} />
+        <TrustModals type="privacy" onClose={() => window.location.href = '/'} />
+        <TrustModals type={modalType} onClose={() => setModalType(null)} />
+      </div>
+    );
+  }
+
+  // Route 5: Dedicated Contact Us Page (SEO & Redirect Link)
+  if (path === '/contact') {
+    return (
+      <div className="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white hero-gradient bg-grid pb-10">
+        <Header onFeedbackClick={() => setModalType('contact')} />
+        <Footer onOpenModal={(type) => setModalType(type)} />
+        <TrustModals type="contact" onClose={() => window.location.href = '/'} />
+        <TrustModals type={modalType} onClose={() => setModalType(null)} />
+      </div>
+    );
+  }
+
   // Popular quick keywords for tags interaction
   const popularKeywords = ['원더윅스', '양도소득세', '전세대출', '수면 사이클', '반려동물 나이'];
 

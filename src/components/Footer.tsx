@@ -43,21 +43,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenModal, isEmbed = false }) 
           {/* Trust Pages Links */}
           <nav className="flex items-center gap-6" aria-label="푸터 신뢰정보 메뉴">
             <button
-              onClick={() => onOpenModal('about')}
+              onClick={() => isEmbed ? window.open('https://easytools.kr/about', '_blank') : onOpenModal('about')}
               className="hover:text-indigo-600 transition-colors font-medium flex items-center gap-1.5 hover:cursor-pointer"
             >
               <Info className="h-4 w-4" />
               소개 (About Us)
             </button>
             <button
-              onClick={() => onOpenModal('privacy')}
+              onClick={() => isEmbed ? window.open('https://easytools.kr/privacy', '_blank') : onOpenModal('privacy')}
               className="hover:text-indigo-600 transition-colors font-medium flex items-center gap-1.5 hover:cursor-pointer"
             >
               <Shield className="h-4 w-4" />
               개인정보처리방침 (Privacy Policy)
             </button>
             <button
-              onClick={() => onOpenModal('contact')}
+              onClick={() => isEmbed ? window.open('https://easytools.kr/contact', '_blank') : onOpenModal('contact')}
               className="hover:text-indigo-600 transition-colors font-medium flex items-center gap-1.5 hover:cursor-pointer"
             >
               <Mail className="h-4 w-4" />
