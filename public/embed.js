@@ -17,11 +17,19 @@
       headerIframe.style.overflow = 'hidden';
       headerIframe.style.display = 'block';
       headerIframe.style.transition = 'height 0.15s ease';
+      headerIframe.style.position = 'absolute';
+      headerIframe.style.top = '0';
+      headerIframe.style.left = '0';
+      headerIframe.style.zIndex = '99999';
 
       if (headerContainer) {
+        headerContainer.style.position = 'relative';
+        headerContainer.style.height = '64px';
+        headerContainer.style.zIndex = '99999';
         headerContainer.appendChild(headerIframe);
       } else {
         // Prepend directly to body if no container is defined
+        document.body.style.paddingTop = '64px';
         document.body.insertBefore(headerIframe, document.body.firstChild);
       }
     }
@@ -89,12 +97,12 @@
       if (data.type === 'easytools-header-close') {
         const header = document.getElementById('easytools-header-iframe');
         if (header) {
-          header.style.position = 'relative';
-          header.style.top = '';
-          header.style.left = '';
+          header.style.position = 'absolute';
+          header.style.top = '0';
+          header.style.left = '0';
           header.style.width = '100%';
           header.style.height = '64px';
-          header.style.zIndex = '9999';
+          header.style.zIndex = '99999';
         }
       }
 
