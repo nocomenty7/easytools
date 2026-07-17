@@ -60,6 +60,26 @@ function App() {
     }
   }, [path]);
 
+  // Manage iframe footer full-screen positioning when modal opens/closes inside the iframe
+  useEffect(() => {
+    if (path === '/footer') {
+      if (modalType) {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'easytools-footer-open'
+          }, '*');
+        }
+      } else {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'easytools-footer-close',
+            height: document.body.scrollHeight || 260
+          }, '*');
+        }
+      }
+    }
+  }, [modalType, path]);
+
   const handleCookieAccept = () => {
     localStorage.setItem('easytools-cookie-consent', 'accepted');
     setShowCookieConsent(false);

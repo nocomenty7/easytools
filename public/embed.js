@@ -112,6 +112,30 @@
           footer.style.height = data.height + 'px';
         }
       }
+
+      if (data.type === 'easytools-footer-open') {
+        const footer = document.getElementById('easytools-footer-iframe');
+        if (footer) {
+          footer.style.position = 'fixed';
+          footer.style.top = '0';
+          footer.style.left = '0';
+          footer.style.width = '100vw';
+          footer.style.height = '100vh';
+          footer.style.zIndex = '999999';
+        }
+      }
+
+      if (data.type === 'easytools-footer-close') {
+        const footer = document.getElementById('easytools-footer-iframe');
+        if (footer) {
+          footer.style.position = 'relative';
+          footer.style.top = '';
+          footer.style.left = '';
+          footer.style.width = '100%';
+          footer.style.height = (data.height || 260) + 'px';
+          footer.style.zIndex = '9999';
+        }
+      }
     });
   }
 
