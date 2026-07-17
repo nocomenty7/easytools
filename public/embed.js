@@ -52,12 +52,15 @@
 
     // 3. Listen for Resize Events from iframes
     window.addEventListener('message', function(event) {
-      // Validate sender origin (allow base site and localhost dev servers)
-      if (
-        event.origin !== BASE_URL && 
-        !event.origin.startsWith('http://localhost') && 
-        !event.origin.includes('vercel.app')
-      ) {
+      // Validate sender origin (allow base site, localhost dev servers, and subdomains)
+      const origin = event.origin;
+      const isAllowed = 
+        origin === BASE_URL || 
+        origin.includes('easytools.kr') || 
+        origin.startsWith('http://localhost') || 
+        origin.includes('vercel.app');
+
+      if (!isAllowed) {
         return;
       }
 
