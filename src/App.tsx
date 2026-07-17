@@ -36,7 +36,7 @@ function App() {
   // Check URL paths to render headers/footers independently for subdomains iframe embedding
   const path = window.location.pathname;
 
-  // Check Cookie Consent & Initialize Google AdSense bottom ad slot on mount
+  // Check Cookie Consent, AdSense, & set transparent html/body background inside iframe routes
   useEffect(() => {
     const consent = localStorage.getItem('easytools-cookie-consent');
     if (!consent) {
@@ -47,7 +47,18 @@ function App() {
     } catch (e) {
       console.error('AdSense initialization error:', e);
     }
-  }, []);
+
+    // Force transparent background for embed endpoints inside the iframe
+    if (path === '/header' || path === '/footer') {
+      document.body.style.background = 'transparent';
+      document.body.style.backgroundColor = 'transparent';
+      const htmlEl = document.documentElement;
+      if (htmlEl) {
+        htmlEl.style.background = 'transparent';
+        htmlEl.style.backgroundColor = 'transparent';
+      }
+    }
+  }, [path]);
 
   const handleCookieAccept = () => {
     localStorage.setItem('easytools-cookie-consent', 'accepted');
