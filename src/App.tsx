@@ -26,6 +26,10 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [modalType, setModalType] = useState<'about' | 'privacy' | 'contact' | null>(null);
 
+  // Category Filtering & Guide Collapse States
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [isArticlesExpanded, setIsArticlesExpanded] = useState(false);
+
   // Quick Mini-Calculator (Pyeong <-> m2) States
   const [pyeong, setPyeong] = useState('10');
   const [m2, setM2] = useState('33.06');
@@ -134,6 +138,12 @@ function App() {
   const marqueeTools = useMemo(() => {
     return [...allTools, ...allTools];
   }, [allTools]);
+
+  // Filtered categories based on selected tab
+  const filteredCategories = useMemo(() => {
+    if (activeCategory === 'all') return categoriesData;
+    return categoriesData.filter(cat => cat.id === activeCategory);
+  }, [activeCategory]);
 
   // Route 1: Render Header Only for Embedding
   if (path === '/header') {
@@ -473,48 +483,59 @@ function App() {
 
         {/* 📚 Multi-Column Pillar Articles (애드센스 통과용 백과사전식 가이드 섹션 - 텍스트 부스터) */}
         <section className="bg-indigo-50/30 border border-indigo-100/50 rounded-3xl p-6 sm:p-10 mb-24 text-left animate-fade-in-up">
-          <div className="flex items-center gap-2.5 mb-8">
-            <BookOpen className="h-5 w-5 text-indigo-600" />
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-800 font-heading">EasyTools 실생활 가이드 & 재무 분석 정보</h2>
-              <p className="text-xs text-slate-400 font-sans mt-0.5">일상의 중요한 결정들에 실질적인 도움이 되는 전문적인 가이드와 상식입니다</p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-2.5">
+              <BookOpen className="h-5 w-5 text-indigo-600 shrink-0" />
+              <div>
+                <h2 className="text-xl font-heading font-black text-slate-800">EasyTools 실생활 가이드 & 재무 분석 정보</h2>
+                <p className="text-xs text-slate-400 font-sans mt-0.5">일상의 중요한 결정들에 실질적인 도움이 되는 전문적인 가이드와 상식입니다</p>
+              </div>
             </div>
+            <button
+              onClick={() => setIsArticlesExpanded(!isArticlesExpanded)}
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-all hover:cursor-pointer self-start sm:self-center"
+            >
+              <span>{isArticlesExpanded ? '가이드 접기' : '실생활 재무 가이드 읽어보기'}</span>
+              <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${isArticlesExpanded ? 'rotate-180' : ''}`} />
+            </button>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {/* Guide 1 */}
-            <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-              <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
-                <DollarSign className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
-                자녀를 위한 장기 복리 투자와 증여 세법 요약
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                어린 자녀에게 비과세 한도 내에서 현금을 증여하고 지수 추종 ETF 등에 투자하여 복리 마법을 일으키는 것은 훌륭한 자산 형성 전략입니다. 대한민국 세법상 미성년 자녀에게는 10년 주기마다 최대 2천만 원까지 증여세 없이 합법적 증여가 가능합니다. 이를 미리 계산하여 20년간 연평균 복리 8%로 운용할 시 예상 금액은 단순 합산의 3배 이상으로 늘어날 수 있습니다. 자녀 증여 계산기를 활용해 복리 결과를 눈으로 시뮬레이션해 보세요.
-              </p>
-            </article>
+          {isArticlesExpanded && (
+            <div className="grid gap-8 md:grid-cols-3 animate-in fade-in slide-in-from-top-4 duration-300">
+              {/* Guide 1 */}
+              <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
+                  <DollarSign className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
+                  자녀를 위한 장기 복리 투자와 증여 세법 요약
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                  어린 자녀에게 비과세 한도 내에서 현금을 증여하고 지수 추종 ETF 등에 투자하여 복리 마법을 일으키는 것은 훌륭한 자산 형성 전략입니다. 대한민국 세법상 미성년 자녀에게는 10년 주기마다 최대 2천만 원까지 증여세 없이 합법적 증여가 가능합니다. 이를 미리 계산하여 20년간 연평균 복리 8%로 운용할 시 예상 금액은 단순 합산의 3배 이상으로 늘어날 수 있습니다. 자녀 증여 계산기를 활용해 복리 결과를 눈으로 시뮬레이션해 보세요.
+                </p>
+              </article>
 
-            {/* Guide 2 */}
-            <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-              <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
-                <Compass className="h-4.5 w-4.5 text-indigo-500 shrink-0" />
-                전세대출 이자와 월세 기회비용 절대 비교
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                많은 청년들이 전세대출을 받아 전세로 거주하는 것과 다달이 월세를 내고 거주하는 것 중 어느 편이 이득인지 고민합니다. 전세를 선택할 경우 대출 이자뿐만 아니라 보증금 마련으로 기회비용을 잃게 되며, 월세는 현금 지출이 즉각 발생합니다. 이 두 조건의 실질 비용을 계산하기 위해서는 현재의 적격 금리, 투자 수익률 기준, 그리고 연간 재정 지출 현황을 정확히 대조해야 합니다. 전세대출 vs 월세 비교 계산기를 이용해 어떤 선택이 더 유리한지 1초 만에 확인하실 수 있습니다.
-              </p>
-            </article>
+              {/* Guide 2 */}
+              <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
+                  <Compass className="h-4.5 w-4.5 text-indigo-500 shrink-0" />
+                  전세대출 이자와 월세 기회비용 절대 비교
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                  많은 청년들이 전세대출을 받아 전세로 거주하는 것과 다달이 월세를 내고 거주하는 것 중 어느 편이 이득인지 고민합니다. 전세를 선택할 경우 대출 이자뿐만 아니라 보증금 마련으로 기회비용을 잃게 되며, 월세는 현금 지출이 즉각 발생합니다. 이 두 조건의 실질 비용을 계산하기 위해서는 현재의 적격 금리, 투자 수익률 기준, 그리고 연간 재정 지출 현황을 정확히 대조해야 합니다. 전세대출 vs 월세 비교 계산기를 이용해 어떤 선택이 더 유리한지 1초 만에 확인하실 수 있습니다.
+                </p>
+              </article>
 
-            {/* Guide 3 */}
-            <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-              <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
-                <Heart className="h-4.5 w-4.5 text-pink-500 shrink-0" />
-                맞벌이 부부의 전략적 연말정산 및 절세 공식
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                맞벌이 부부의 연말정산은 각자의 급여 수준과 신용카드 소비 패턴에 맞춰 인적 공제 대상을 황금 비율로 배분하는 것이 중요합니다. 일반적으로 소득이 더 높은 배우자에게 소득 공제(부양 가족 등)를 몰아주는 것이 종합소득세 누진세율 구간을 낮춰 절세 효과를 늘릴 수 있습니다. 다만, 총급여액의 25% 이상을 초과해 지출해야 하는 신용카드 소득 공제 요건 등의 경우 급여가 낮은 배우자에게 몰아주는 것이 유리할 때도 있습니다. 이러한 복잡한 비례 구간을 시뮬레이션을 통해 환급 세액을 극대화해 보시기 바랍니다.
-              </p>
-            </article>
-          </div>
+              {/* Guide 3 */}
+              <article className="space-y-3 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <h3 className="text-sm font-black text-slate-800 flex items-center gap-1.5 font-heading">
+                  <Heart className="h-4.5 w-4.5 text-pink-500 shrink-0" />
+                  맞벌이 부부의 전략적 연말정산 및 절세 공식
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed font-sans">
+                  맞벌이 부부의 연말정산은 각자의 급여 수준과 신용카드 소비 패턴에 맞춰 인적 공제 대상을 황금 비율로 배분하는 것이 중요합니다. 일반적으로 소득이 더 높은 배우자에게 소득 공제(부양 가족 등)를 몰아주는 것이 종합소득세 누진세율 구간을 낮춰 절세 효과를 늘릴 수 있습니다. 다만, 총급여액의 25% 이상을 초과해 지출해야 하는 신용카드 소득 공제 요건 등의 경우 급여가 낮은 배우자에게 몰아주는 것이 유리할 때도 있습니다. 이러한 복잡한 비례 구간을 시뮬레이션을 통해 환급 세액을 극대화해 보시기 바랍니다.
+                </p>
+              </article>
+            </div>
+          )}
         </section>
 
         {/* 📊 EasyTools 실시간 현황 (Interactive Stats Dashboard) */}
@@ -551,14 +572,45 @@ function App() {
         </section>
 
         {/* 6 Category & Tools Grid */}
-        <section className="space-y-20 mb-28">
-          {categoriesData.map(category => {
+        <section className="space-y-16 mb-28">
+          <div className="text-center mb-12 scroll-mt-20" id="categories">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-800 font-heading mb-4">계산기 카테고리</h2>
+            <div className="inline-flex flex-wrap justify-center gap-1.5 p-1.5 bg-slate-100/70 rounded-2xl border border-slate-200/50">
+              <button
+                onClick={() => setActiveCategory('all')}
+                className={`px-4.5 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-200 hover:cursor-pointer ${
+                  activeCategory === 'all'
+                    ? 'bg-white text-indigo-600 shadow-sm'
+                    : 'text-slate-500 hover:text-indigo-600'
+                }`}
+              >
+                전체보기 ({allTools.length})
+              </button>
+              {categoriesData.map(category => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`px-4.5 py-2.5 rounded-xl text-xs font-black tracking-wide transition-all duration-200 hover:cursor-pointer ${
+                    activeCategory === category.id
+                      ? 'bg-white text-indigo-600 shadow-sm'
+                      : 'text-slate-500 hover:text-indigo-600'
+                  }`}
+                >
+                  {category.nameKo} ({category.tools.length})
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {filteredCategories.map((category, index) => {
             const Icon = category.icon;
             return (
               <section
                 key={category.id}
                 id={category.id}
-                className="scroll-mt-20 border-t border-slate-100 pt-12 first:border-0 first:pt-0"
+                className={`scroll-mt-20 ${
+                  activeCategory === 'all' && index > 0 ? 'border-t border-slate-100 pt-12' : ''
+                }`}
               >
                 {/* Category Header */}
                 <div className="max-w-3xl mb-8 text-left">
