@@ -1,4 +1,4 @@
-// EasyTools Main Entrypoint - Force Cache Refresh Trigger 1
+// EasyTools Main Entrypoint - Force Cache Refresh Trigger 2 (AdSense Integration)
 import { useState, useMemo, useEffect } from 'react';
 import {
   Search,
@@ -48,7 +48,10 @@ function App() {
       setShowCookieConsent(true);
     }
     try {
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      const adsbygoogle = (window as any).adsbygoogle || [];
+      adsbygoogle.push({});
+      adsbygoogle.push({});
+      adsbygoogle.push({});
     } catch (e) {
       console.error('AdSense initialization error:', e);
     }
@@ -354,6 +357,16 @@ function App() {
             ))}
           </div>
         </section>
+
+        {/* Google AdSense Top Ad Slot */}
+        <div className="adsense-slot adsense-top max-w-7xl mx-auto my-8 min-h-[100px] w-full flex justify-center items-center bg-slate-50/50 border border-slate-100/80 rounded-2xl p-4 overflow-hidden">
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%' }}
+               data-ad-client="ca-pub-3522634980237009"
+               data-ad-slot="3648995148"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
 
         {/* 🔥 실시간 인기 계산기 & 맛보기 미니 계산기 (Grid Layout) */}
         <section className="grid gap-8 lg:grid-cols-12 mb-24 animate-fade-in-up items-start">
@@ -679,6 +692,16 @@ function App() {
           })}
         </section>
 
+        {/* Google AdSense Middle Ad Slot */}
+        <div className="adsense-slot adsense-middle max-w-7xl mx-auto my-8 min-h-[100px] w-full flex justify-center items-center bg-slate-50/50 border border-slate-100/80 rounded-2xl p-4 overflow-hidden">
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%' }}
+               data-ad-client="ca-pub-3522634980237009"
+               data-ad-slot="9932322148"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+
         {/* FAQ Section */}
         <section className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 p-6 sm:p-10 max-w-4xl mx-auto scroll-mt-20" id="faq">
           <div className="flex items-center gap-3 mb-6 text-left">
@@ -743,7 +766,7 @@ function App() {
           <ins className="adsbygoogle"
                style={{ display: 'block', width: '100%' }}
                data-ad-client="ca-pub-3522634980237009"
-               data-ad-slot="7310226958"
+               data-ad-slot="9615637692"
                data-ad-format="auto"
                data-full-width-responsive="true"></ins>
         </div>
